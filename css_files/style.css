@@ -1,0 +1,868 @@
+/* CSS Document — Modernized Responsive Layout */
+
+/* === Base === */
+body {
+    margin: 0;
+    padding: 40px 30px;
+    background-color: #fff;
+    color: #333;
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    text-align: left;
+    font-size: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Responsive Layout === */
+#wrapper {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Override ALL fixed-width table attributes inside structural elements */
+#enterheader table,
+#box > table,
+#footer table {
+    width: 100% !important;
+}
+
+/* === Header === */
+#enterheader {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+/* Header name cells — let them breathe */
+#enterheader td[bgcolor="#FFFFFF"] {
+    width: auto !important;
+}
+
+/* Remove the grey bar rows entirely */
+#enterheader td[bgcolor="#CCCCCC"] {
+    height: 0 !important;
+    padding: 0 !important;
+    font-size: 0;
+    line-height: 0;
+    background-color: transparent !important;
+}
+
+/* Replace thick red line with a subtle hairline */
+#enterheader td[bgcolor="#CC0000"] {
+    height: 1px !important;
+    background-color: #ddd !important;
+}
+
+/* === Content Area === */
+#enterbox {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+}
+
+#header {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #fff;
+}
+
+#box {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: #fff;
+}
+
+/* Make the td containing box1/box2/box3 a flex row */
+#box > table > tbody > tr > td {
+    display: flex;
+}
+
+#box1 {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    min-height: 500px;
+    flex-shrink: 0;
+    float: none;
+}
+
+#box1 table {
+    width: 100% !important;
+}
+
+#box2 {
+    margin: 0;
+    padding: 0;
+    width: 1px;
+    min-height: 500px;
+    background: #e8e8e8;
+    float: none;
+}
+
+/* Hide the old colored table inside box2 */
+#box2 table {
+    display: none;
+}
+
+#box3 {
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    min-height: 500px;
+    float: none;
+}
+
+/* Let inner content tables fill the available width */
+#box3 table {
+    width: 100% !important;
+}
+
+#box3 td[width] {
+    width: auto !important;
+}
+
+.index-poem-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    padding: 52px 40px 28px 40px;
+    box-sizing: border-box;
+}
+
+.index-poem-frame img {
+    display: block;
+    margin: 0 auto;
+    max-height: 60vh;
+    max-width: min(100%, 520px);
+    width: auto;
+    height: auto;
+}
+
+/* === Footer === */
+#footer {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+}
+
+#footer td[width] {
+    width: auto !important;
+}
+
+/* Subtle hairline replaces thick red bar */
+#footer td[bgcolor="#CC0000"] {
+    height: 1px !important;
+    background-color: #ddd !important;
+}
+
+/* Clean footer nav strip */
+#footer td[bgcolor="#CCCCCC"] {
+    background-color: #faf9f7 !important;
+    padding: 18px 0 !important;
+    height: auto !important;
+}
+
+#enterfooter {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #000;
+}
+
+/* Artwork page divider lines — refined to subtle */
+#boxongoing,
+#boxpfigurationabstraction,
+#boxpmythsymbols,
+#boxpbittersweetseries,
+#boxtheseedproject,
+#boxthebookproject,
+#boxwopbittersweetseries,
+#boxwopmythsymbols,
+#boxwopfigurationabstraction {
+    margin: 0;
+    padding: 0;
+    width: 1px;
+    background-color: #e8e8e8;
+    float: left;
+}
+
+/* === Typography === */
+
+.header-text-eng {
+    font-family: 'Garamond', 'Georgia', 'Times New Roman', serif;
+    font-size: clamp(15px, 1.8vw, 20px);
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #1a1a1a;
+    line-height: 50px;
+    white-space: nowrap;
+    display: block;
+    padding-left: 5px;
+    text-transform: uppercase;
+}
+
+.header-text-jap {
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'MS Mincho', 'Hiragino Kaku Gothic ProN', serif;
+    font-size: clamp(14px, 1.6vw, 18px);
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #000;
+    line-height: 50px;
+    white-space: nowrap;
+    display: block;
+    padding-left: 5px;
+}
+
+.indexheader { font-size: 120%; color: #000; }
+.indexlink { font-size: 90%; color: #000; }
+.indexbar { font-size: 100%; color: #000; }
+
+.maintext {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.8;
+    max-width: 680px;
+}
+
+.footerlink {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    color: #888;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+}
+.footerlink:hover {
+    color: #1a1a1a;
+}
+
+.copyright { font-size: 70%; color: #777; font-weight: 400; }
+
+.artheader { display: none; }
+.artpage { font-size: 90%; color: #000; }
+#current { color: #CC0000; text-decoration: underline; }
+a.artlink:link { color: #000; text-decoration: none; }
+a.artlink:visited { color: #000; text-decoration: none; }
+a.artlink:hover { color: #333; text-decoration: none; }
+
+.contactformheadertext { font-size: 78%; color: #333; line-height: 20px; }
+
+.thankyoutext { font-size: 120%; color: #333; font-weight: bold; }
+
+.footertext { font-size: 75%; color: #FFF; }
+a.footertext:link { color: #FFF; text-decoration: none; }
+a.footertext:visited { color: #FFF; text-decoration: none; }
+a.footertext:hover { color: #FFCC00; text-decoration: none; }
+
+a:link { color: #333; text-decoration: none; }
+a:visited { color: #333; text-decoration: none; }
+a:hover { color: #1a1a1a; text-decoration: none; }
+
+/* === Modern Text-Based Menu === */
+.modern-menu {
+    list-style: none !important;
+    padding: 40px 0 0 15px !important;
+    margin: 0 !important;
+    width: 185px;
+    position: relative;
+    font-family: 'Helvetica Neue', Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+}
+
+.modern-menu li {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.modern-menu a.main-link {
+    display: block;
+    padding: 5px 0 5px 10px;
+    color: #222;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-left: 2px solid transparent;
+    transition: all 0.3s ease;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.modern-menu-list > li > a.main-link {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.modern-menu a.main-link:hover,
+.modern-menu a.main-link.active {
+    color: #CC0000;
+    border-left: 2px solid #CC0000;
+    padding-left: 15px;
+}
+
+/* Submenu Styling */
+.modern-menu .submenu {
+    list-style: none !important;
+    padding: 5px 0 0 12px !important;
+    margin: 5px 0 0 0 !important;
+    border-left: 1px solid #eee;
+}
+
+.modern-menu .submenu li {
+    margin-bottom: 5px;
+}
+
+.modern-menu .submenu li:last-child {
+    margin-bottom: 0;
+}
+
+.modern-menu .submenu a {
+    display: block;
+    padding: 3px 0;
+    color: #555;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+}
+
+.modern-menu .submenu a:hover {
+    color: #CC0000;
+    padding-left: 5px;
+}
+
+/* Nested Submenu Header */
+.modern-menu .submenu a.main-link {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 0;
+    border-left: none;
+    color: #444;
+    letter-spacing: 1px;
+}
+
+.modern-menu .submenu a.main-link:hover {
+    color: #CC0000;
+    padding-left: 5px;
+    border-left: none;
+}
+
+/* === Gallery Grid === */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+    gap: 22px 30px;
+    padding: 30px 20px;
+}
+
+.gallery-item {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-item a.MagicThumb {
+    display: inline-block;
+    border: 1px solid #f0f0f0;
+    padding: 6px;
+    background: #fff;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+    cursor: pointer;
+}
+
+.gallery-item a.MagicThumb:hover {
+    border-color: #CC0000;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.gallery-item img.thumb-image {
+    height: 150px;
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.pdf-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    min-width: 140px;
+    padding: 12px;
+    border: 1px solid #f0f0f0;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+    color: #333;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Hide caption spans visually in thumbnail grid, but keep accessible to MagicThumb */
+.gallery-item a.MagicThumb span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* === Global Color Overrides === */
+
+/* Soften any remaining grey bars on legacy pages */
+td[bgcolor="#CCCCCC"] {
+    background-color: #faf9f7 !important;
+}
+
+/* Sharpen poem images */
+img[src*="poem"] {
+    image-rendering: auto;
+}
+
+img[src*="poemjap"] {
+    max-height: 56vh !important;
+}
+
+/* ============================================================
+   MOBILE & TABLET RESPONSIVE
+   ============================================================ */
+
+.mobile-menu-toggle {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+
+    body {
+        padding: 14px 14px calc(74px + env(safe-area-inset-bottom)) 14px;
+    }
+
+    #wrapper {
+        max-width: none;
+    }
+
+    #box > table > tbody > tr > td {
+        flex-direction: column;
+    }
+
+    #box1 {
+        width: auto;
+        min-height: auto;
+        padding: 0;
+        margin: 0;
+        border: 1px solid #eee;
+        border-radius: 999px;
+        background: rgba(250,249,247,0.96);
+        box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: calc(12px + env(safe-area-inset-bottom));
+        z-index: 200;
+    }
+
+    #box2 {
+        display: none;
+    }
+
+    #box3 {
+        min-height: auto;
+    }
+
+    #box3 > div[style] {
+        padding: 10px 0 18px 0 !important;
+    }
+
+    #box3 > .index-poem-frame {
+        min-height: calc(100dvh - 150px);
+        padding: 42px 12px calc(76px + env(safe-area-inset-bottom)) 12px !important;
+    }
+
+    .index-poem-frame img {
+        max-height: 54vh;
+        max-width: 92%;
+    }
+
+    #footer {
+        padding-bottom: calc(88px + env(safe-area-inset-bottom));
+    }
+
+    .modern-menu {
+        width: 100%;
+        padding: 0 !important;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        min-height: 50px;
+        padding: 13px 18px;
+        border: 0;
+        background: transparent;
+        color: #333;
+        font-family: 'Helvetica Neue', Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+        font-size: 13px;
+        letter-spacing: 2px;
+        text-align: center;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    .mobile-menu-toggle::after {
+        content: "+";
+        color: #999;
+        font-size: 16px;
+        line-height: 1;
+    }
+
+    .modern-menu.menu-open .mobile-menu-toggle::after {
+        content: "–";
+    }
+
+    .modern-menu-list {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: calc(100% + 10px);
+        padding: 16px 18px !important;
+        max-height: calc(100dvh - 132px);
+        overflow-y: auto;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        background: rgba(250,249,247,0.98);
+        box-shadow: 0 14px 38px rgba(0,0,0,0.14);
+    }
+
+    .modern-menu.menu-open .modern-menu-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 18px;
+        row-gap: 4px;
+    }
+
+    .modern-menu-list > li {
+        margin-bottom: 4px;
+    }
+
+    .modern-menu a.main-link {
+        padding: 8px 0;
+        font-size: 13px;
+        border-left: none;
+        border-bottom: 1px solid transparent;
+        white-space: normal;
+    }
+
+    .modern-menu a.main-link:hover,
+    .modern-menu a.main-link.active {
+        border-left: none;
+        border-bottom: 1px solid #CC0000;
+        padding-left: 0;
+    }
+
+    .modern-menu .submenu {
+        padding: 2px 0 4px 0 !important;
+        margin: 0 !important;
+        border-left: none;
+    }
+
+    .modern-menu .submenu a.main-link {
+        font-size: 12px;
+        padding: 6px 0;
+    }
+
+    .modern-menu .submenu a {
+        font-size: 11px;
+        line-height: 1.35;
+        padding: 4px 0;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+        gap: 18px;
+        padding: 16px 0;
+    }
+
+    .gallery-item img.thumb-image {
+        height: 135px;
+        max-width: 165px;
+    }
+
+    .header-text-eng,
+    .header-text-jap {
+        line-height: 42px;
+        padding-left: 8px;
+    }
+
+    .maintext {
+        max-width: 100%;
+    }
+
+    .contact-intro {
+        max-width: 100% !important;
+    }
+
+    input[type="text"], select, textarea {
+        max-width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    body {
+        padding: 8px 10px calc(74px + env(safe-area-inset-bottom)) 10px;
+    }
+
+    #box1 {
+        left: 12px;
+        right: 12px;
+        bottom: calc(10px + env(safe-area-inset-bottom));
+    }
+
+    #box3 > div[style] {
+        padding: 8px 0 14px 0 !important;
+    }
+
+    #footer {
+        padding-bottom: calc(92px + env(safe-area-inset-bottom));
+    }
+
+    .header-text-eng {
+        font-size: 14px;
+        letter-spacing: 2px;
+        line-height: 38px;
+    }
+
+    .header-text-jap {
+        font-size: 14px;
+        letter-spacing: 1.5px;
+        line-height: 38px;
+    }
+
+    .modern-menu.menu-open .modern-menu-list {
+        display: block;
+    }
+
+    .modern-menu-list {
+        border-radius: 10px;
+    }
+
+    .modern-menu a.main-link {
+        padding: 9px 0;
+        font-size: 14px;
+    }
+
+    .modern-menu .submenu {
+        padding: 0 0 4px 14px !important;
+        border-left: 1px solid #e8e8e8;
+    }
+
+    .modern-menu .submenu a.main-link {
+        font-size: 13px;
+    }
+
+    .modern-menu .submenu a {
+        font-size: 12px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px 10px;
+        padding: 8px 0 14px 0;
+    }
+
+    .gallery-item {
+        align-items: stretch;
+    }
+
+    .gallery-item a.MagicThumb {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 154px;
+        padding: 5px;
+    }
+
+    .gallery-item img.thumb-image {
+        width: 100%;
+        height: 140px;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    #box3 > div[style] img[src*="poem"] {
+        max-height: 54vh;
+    }
+
+    .maintext {
+        font-size: 13px;
+        line-height: 1.7;
+        padding-right: 4px;
+    }
+
+    .footerlink {
+        font-size: 10px;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+
+    .copyright {
+        font-size: 68%;
+        color: #777;
+        font-weight: 400;
+    }
+
+    #box3 > div[style] img[src*="poemjap"] {
+        max-height: 46vh !important;
+    }
+
+    #box3 > .index-poem-frame {
+        min-height: calc(100dvh - 170px);
+        padding: 34px 10px calc(76px + env(safe-area-inset-bottom)) 10px !important;
+    }
+
+    .index-poem-frame img {
+        max-height: 50vh;
+        max-width: 94%;
+    }
+
+    .index-poem-frame img[src*="poemjap"] {
+        max-height: 46vh !important;
+    }
+}
+
+@media screen and (max-width: 360px) {
+
+    .gallery-grid {
+        gap: 12px 8px;
+    }
+
+    .gallery-item a.MagicThumb {
+        min-height: 140px;
+    }
+
+    .gallery-item img.thumb-image {
+        height: 126px;
+    }
+}
+
+@media screen and (max-width: 900px) and (orientation: landscape) {
+
+    body {
+        padding: 14px 18px;
+    }
+
+    #box > table > tbody > tr > td {
+        flex-direction: row;
+    }
+
+    #box1 {
+        width: 180px;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        position: static;
+        left: auto;
+        right: auto;
+        bottom: auto;
+    }
+
+    #box2 {
+        display: block;
+        min-height: 420px;
+    }
+
+    #footer {
+        padding-bottom: 0;
+    }
+
+    .mobile-menu-toggle {
+        display: none;
+    }
+
+    .modern-menu-list,
+    .modern-menu.menu-open .modern-menu-list {
+        position: static;
+        display: block;
+        padding: 0 !important;
+        max-height: none;
+        overflow: visible;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .modern-menu {
+        width: 170px;
+        padding: 18px 0 0 10px !important;
+    }
+
+    .modern-menu a.main-link {
+        padding: 5px 0 5px 10px;
+        font-size: 13px;
+        border-left: 2px solid transparent;
+        border-bottom: none;
+        white-space: nowrap;
+    }
+
+    .modern-menu-list > li > a.main-link {
+        font-size: 14px;
+    }
+
+    .modern-menu a.main-link:hover,
+    .modern-menu a.main-link.active {
+        border-left: 2px solid #CC0000;
+        border-bottom: none;
+        padding-left: 15px;
+    }
+
+    .modern-menu .submenu {
+        padding: 5px 0 0 12px !important;
+        margin: 5px 0 0 0 !important;
+        border-left: 1px solid #eee;
+    }
+
+    .modern-menu .submenu a {
+        padding: 3px 0;
+        font-size: 11px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+        gap: 16px;
+    }
+
+    .gallery-item img.thumb-image {
+        height: 115px;
+    }
+}
+

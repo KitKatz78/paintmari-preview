@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Gallery — paintmari.com</title>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #111;
+            color: #ddd;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            height: 100dvh;
+            width: 100vw;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: pan-y;
+        }
+
+        /* ── Layout ───────────────────────────────────── */
+        .viewer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            height: 100dvh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .image-stage {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 0;
+            padding: 50px 80px 10px 80px;
+            touch-action: pan-y;
+        }
+
+        .image-stage img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-stage img.loaded {
+            opacity: 1;
+        }
+
+        /* ── Caption ──────────────────────────────────── */
+        .caption-bar {
+            width: 100%;
+            text-align: center;
+            padding: 12px 90px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(-14px);
+        }
+
+        .caption-text {
+            font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        /* ── Navigation Arrows ────────────────────────── */
+        .nav-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 18px 14px;
+            z-index: 20;
+            opacity: 0.35;
+            transition: opacity 0.25s ease;
+            outline: none;
+        }
+
+        .nav-btn:hover { opacity: 0.85; }
+        .nav-btn:active { opacity: 1; }
+
+        .nav-btn svg {
+            width: 22px;
+            height: 40px;
+            stroke: #fff;
+            stroke-width: 1.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .nav-prev { left: 8px; }
+        .nav-next { right: 8px; }
+
+        .nav-btn.hidden { display: none; }
+
+        /* ── Close Button ─────────────────────────────── */
+        .close-btn {
+            position: fixed;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 20;
+            opacity: 0.4;
+            transition: opacity 0.25s ease;
+            outline: none;
+        }
+
+        .close-btn:hover { opacity: 0.9; }
+
+        .close-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: #fff;
+            stroke-width: 1.5;
+            fill: none;
+            stroke-linecap: round;
+        }
+
+        /* ── Counter ──────────────────────────────────── */
+        .counter {
+            position: fixed;
+            bottom: 14px;
+            right: 20px;
+            font-size: 11px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.25);
+            letter-spacing: 1px;
+        }
+
+        .viewer-copyright {
+            position: fixed;
+            bottom: 14px;
+            left: 20px;
+            z-index: 19;
+            font-size: 9.5px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.46);
+            letter-spacing: 0.5px;
+            pointer-events: none;
+        }
+
+        /* ── Loading Spinner ──────────────────────────── */
+        .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 28px;
+            height: 28px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-top-color: rgba(255,255,255,0.4);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .spinner.hidden { display: none; }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @media screen and (max-width: 768px) {
+            .image-stage {
+                align-items: center;
+                padding: 42px 20px 84px 20px;
+                transform: none;
+            }
+
+            .caption-bar {
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: calc(18px + env(safe-area-inset-bottom));
+                z-index: 18;
+                min-height: 0;
+                padding: 0 34px;
+                transform: none;
+                pointer-events: none;
+            }
+
+            .caption-text {
+                font-size: 12.8px;
+                line-height: 1.35;
+            }
+
+            .nav-btn {
+                width: 46px;
+                height: 46px;
+                padding: 0;
+                border-radius: 50%;
+                background: rgba(255,255,255,0.06);
+                opacity: 0.75;
+            }
+
+            .nav-btn svg {
+                width: 16px;
+                height: 30px;
+            }
+
+            .nav-prev {
+                left: 0;
+            }
+
+            .nav-next {
+                right: 0;
+            }
+
+            .close-btn {
+                top: calc(6px + env(safe-area-inset-top));
+                right: 8px;
+                opacity: 0.78;
+            }
+
+            .counter {
+                right: 12px;
+                bottom: calc(8px + env(safe-area-inset-bottom));
+            }
+
+            .viewer-copyright {
+                bottom: calc(8px + env(safe-area-inset-bottom));
+                left: 12px;
+                font-size: 8.5px;
+            }
+        }
+
+        @media screen and (orientation: landscape) and (max-width: 1024px) and (max-height: 540px) {
+            .image-stage {
+                align-items: center;
+                padding: 4px 14px 20px 14px;
+                transform: none;
+            }
+
+            .caption-bar {
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: calc(2px + env(safe-area-inset-bottom));
+                z-index: 18;
+                min-height: 0;
+                padding: 0 48px;
+                transform: none;
+                pointer-events: none;
+            }
+
+            .caption-text {
+                font-size: 9.2px;
+                line-height: 1.15;
+            }
+
+            .nav-btn {
+                width: 38px;
+                height: 38px;
+                padding: 0;
+                border-radius: 50%;
+                background: rgba(255,255,255,0.06);
+                opacity: 0.75;
+            }
+
+            .nav-btn svg {
+                width: 14px;
+                height: 26px;
+            }
+
+            .nav-prev {
+                left: 2px;
+            }
+
+            .nav-next {
+                right: 2px;
+            }
+
+            .close-btn {
+                top: calc(2px + env(safe-area-inset-top));
+                right: 8px;
+            }
+
+            .counter {
+                bottom: calc(5px + env(safe-area-inset-bottom));
+            }
+
+            .viewer-copyright {
+                bottom: calc(5px + env(safe-area-inset-bottom));
+                left: 10px;
+                font-size: 8px;
+            }
+        }
+
+        @media screen and (max-width: 480px) and (orientation: portrait) {
+            .image-stage {
+                padding: 40px 10px 88px 10px;
+                transform: none;
+            }
+
+            .caption-bar {
+                position: fixed;
+                bottom: calc(18px + env(safe-area-inset-bottom));
+                min-height: 0;
+                padding-left: 18px;
+                padding-right: 18px;
+                transform: none;
+                pointer-events: none;
+            }
+
+            .nav-btn {
+                top: auto;
+                bottom: calc(56px + env(safe-area-inset-bottom));
+                transform: none;
+            }
+
+            .counter {
+                display: none;
+            }
+
+            .viewer-copyright {
+                bottom: calc(4px + env(safe-area-inset-bottom));
+                left: 8px;
+                font-size: 7.5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="viewer">
+
+    <!-- Close -->
+    <button class="close-btn" id="closeBtn" title="Close (Esc)">
+        <svg viewBox="0 0 20 20">
+            <line x1="2" y1="2" x2="18" y2="18"/>
+            <line x1="18" y1="2" x2="2" y2="18"/>
+        </svg>
+    </button>
+
+    <!-- Prev -->
+    <button class="nav-btn nav-prev" id="prevBtn" title="Previous (←)">
+        <svg viewBox="0 0 22 40">
+            <polyline points="18,2 4,20 18,38"/>
+        </svg>
+    </button>
+
+    <!-- Next -->
+    <button class="nav-btn nav-next" id="nextBtn" title="Next (→)">
+        <svg viewBox="0 0 22 40">
+            <polyline points="4,2 18,20 4,38"/>
+        </svg>
+    </button>
+
+    <!-- Image -->
+    <div class="image-stage" id="imageStage">
+        <div class="spinner" id="spinner"></div>
+        <img id="mainImage" alt="" />
+    </div>
+
+    <!-- Caption -->
+    <div class="caption-bar">
+        <span class="caption-text" id="captionText"></span>
+    </div>
+
+    <!-- Counter -->
+    <div class="counter" id="counter"></div>
+
+    <div class="viewer-copyright" data-copyright-year="2006">&copy; <span id="copyright-year">2026</span> Paintmari.com.</div>
+
+</div>
+
+<script src="js/copyright.js"></script>
+<script>
+(function () {
+    'use strict';
+
+    var gallery = [];
+    var currentIndex = 0;
+
+    var mainImage   = document.getElementById('mainImage');
+    var imageStage  = document.getElementById('imageStage');
+    var captionBar  = document.querySelector('.caption-bar');
+    var captionText = document.getElementById('captionText');
+    var counter     = document.getElementById('counter');
+    var prevBtn     = document.getElementById('prevBtn');
+    var nextBtn     = document.getElementById('nextBtn');
+    var closeBtn    = document.getElementById('closeBtn');
+    var spinner     = document.getElementById('spinner');
+    var touchStartX = 0;
+    var touchStartY = 0;
+
+    /* ── Initialise ────────────────────────────────── */
+    function init() {
+        try {
+            gallery = JSON.parse(sessionStorage.getItem('galleryData')) || [];
+            currentIndex = parseInt(sessionStorage.getItem('galleryIndex'), 10) || 0;
+        } catch (e) {
+            gallery = [];
+            currentIndex = 0;
+        }
+
+        if (gallery.length === 0) {
+            captionText.textContent = 'No images to display.';
+            prevBtn.classList.add('hidden');
+            nextBtn.classList.add('hidden');
+            spinner.classList.add('hidden');
+            return;
+        }
+
+        if (currentIndex < 0 || currentIndex >= gallery.length) {
+            currentIndex = 0;
+        }
+
+        showImage(currentIndex);
+    }
+
+    /* ── Display ───────────────────────────────────── */
+    function showImage(idx) {
+        currentIndex = idx;
+
+        /* Update navigation visibility */
+        prevBtn.classList.toggle('hidden', gallery.length <= 1);
+        nextBtn.classList.toggle('hidden', gallery.length <= 1);
+
+        /* Update counter */
+        if (gallery.length > 1) {
+            counter.textContent = (currentIndex + 1) + ' / ' + gallery.length;
+        } else {
+            counter.textContent = '';
+        }
+
+        /* Load image */
+        spinner.classList.remove('hidden');
+        mainImage.classList.remove('loaded');
+
+        var item = gallery[currentIndex];
+        mainImage.alt = item.caption || '';
+        captionText.textContent = item.caption || '';
+        positionMobileCaption();
+
+        mainImage.onload = function () {
+            spinner.classList.add('hidden');
+            mainImage.classList.add('loaded');
+            positionMobileCaption();
+        };
+        mainImage.onerror = function () {
+            spinner.classList.add('hidden');
+            mainImage.classList.add('loaded');
+            captionText.textContent = 'Image could not be loaded.';
+            positionMobileCaption();
+        };
+        mainImage.src = item.url;
+    }
+
+    /* ── Navigation ────────────────────────────────── */
+    function prev() {
+        if (gallery.length <= 1) return;
+        var idx = (currentIndex - 1 + gallery.length) % gallery.length;
+        showImage(idx);
+    }
+
+    function next() {
+        if (gallery.length <= 1) return;
+        var idx = (currentIndex + 1) % gallery.length;
+        showImage(idx);
+    }
+
+    function closeViewer() {
+        if (!window.opener && window.history.length > 1) {
+            window.history.back();
+            return;
+        }
+        window.close();
+    }
+
+    function isMobileViewerLayout() {
+        if (!window.matchMedia) return false;
+        return window.matchMedia('(max-width: 768px)').matches ||
+            window.matchMedia('(orientation: landscape) and (max-width: 1024px) and (max-height: 540px)').matches;
+    }
+
+    function positionMobileCaption() {
+        if (!captionBar) return;
+
+        if (!isMobileViewerLayout() || !mainImage.classList.contains('loaded')) {
+            captionBar.style.top = '';
+            captionBar.style.bottom = '';
+            return;
+        }
+
+        var rect = mainImage.getBoundingClientRect();
+        var height = window.innerHeight || document.documentElement.clientHeight;
+        var isLandscape = window.matchMedia &&
+            window.matchMedia('(orientation: landscape) and (max-width: 1024px) and (max-height: 540px)').matches;
+        var gap = isLandscape ? 3 : 4;
+        var maxTop = height - captionBar.offsetHeight - gap;
+        var top = Math.min(rect.bottom + gap, maxTop);
+
+        captionBar.style.top = Math.round(Math.max(top, gap)) + 'px';
+        captionBar.style.bottom = 'auto';
+    }
+
+    /* ── Event Listeners ───────────────────────────── */
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+    closeBtn.addEventListener('click', closeViewer);
+
+    imageStage.addEventListener('touchstart', function (e) {
+        if (!e.changedTouches || !e.changedTouches.length) return;
+        touchStartX = e.changedTouches[0].clientX;
+        touchStartY = e.changedTouches[0].clientY;
+    }, { passive: true });
+
+    imageStage.addEventListener('touchend', function (e) {
+        if (!e.changedTouches || !e.changedTouches.length) return;
+
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        var dy = e.changedTouches[0].clientY - touchStartY;
+
+        if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+
+        if (dx < 0) {
+            next();
+        } else {
+            prev();
+        }
+    }, { passive: true });
+
+    document.addEventListener('keydown', function (e) {
+        switch (e.key) {
+            case 'ArrowLeft':  prev(); break;
+            case 'ArrowRight': next(); break;
+            case 'Escape':     closeViewer(); break;
+        }
+    });
+
+    window.addEventListener('resize', positionMobileCaption);
+    window.addEventListener('orientationchange', function () {
+        setTimeout(positionMobileCaption, 250);
+    });
+
+    /* Preload adjacent images for smooth navigation */
+    function preloadAdjacent() {
+        if (gallery.length <= 1) return;
+        var prevIdx = (currentIndex - 1 + gallery.length) % gallery.length;
+        var nextIdx = (currentIndex + 1) % gallery.length;
+        (new Image()).src = gallery[prevIdx].url;
+        (new Image()).src = gallery[nextIdx].url;
+    }
+
+    mainImage.addEventListener('load', function () {
+        preloadAdjacent();
+        positionMobileCaption();
+    });
+
+    /* ── Start ─────────────────────────────────────── */
+    init();
+})();
+</script>
+
+</body>
+</html>
