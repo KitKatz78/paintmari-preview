@@ -453,6 +453,7 @@ img[src*="poem"] {
     image-rendering: auto;
 }
 
+img[src*="poemeng"],
 img[src*="poemjap"] {
     max-height: 50vh !important;
 }
