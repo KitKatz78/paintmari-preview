@@ -89,7 +89,7 @@ body {
 #box1 {
     margin: 0;
     padding: 0;
-    width: 200px;
+    width: 210px;
     min-height: 500px;
     flex-shrink: 0;
     float: none;
@@ -231,16 +231,16 @@ body {
 .indexbar { font-size: 100%; color: #000; }
 
 .maintext {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.8;
+    font-size: 15px;
+    color: #222;
+    line-height: 1.85;
     max-width: 680px;
 }
 
 .footerlink {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    color: #888;
+    font-size: 12px;
+    color: #555;
     letter-spacing: 1.5px;
     text-decoration: none;
     text-transform: uppercase;
@@ -250,7 +250,7 @@ body {
     color: #1a1a1a;
 }
 
-.copyright { font-size: 70%; color: #777; font-weight: 400; }
+.copyright { font-size: 78%; color: #555; font-weight: 400; }
 
 .artheader { display: none; }
 .artpage { font-size: 90%; color: #000; }
@@ -261,7 +261,17 @@ a.artlink:hover { color: #333; text-decoration: none; }
 
 .contactformheadertext { font-size: 78%; color: #333; line-height: 20px; }
 
-.thankyoutext { font-size: 120%; color: #333; font-weight: bold; }
+.thankyoutext {
+    font-size: 120%;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+}
+
+.thankyou-note {
+    text-align: center;
+    margin-top: 14px;
+}
 
 .footertext { font-size: 75%; color: #FFF; }
 a.footertext:link { color: #FFF; text-decoration: none; }
@@ -277,7 +287,7 @@ a:hover { color: #1a1a1a; text-decoration: none; }
     list-style: none !important;
     padding: 40px 0 0 15px !important;
     margin: 0 !important;
-    width: 185px;
+    width: 195px;
     position: relative;
     font-family: 'Helvetica Neue', Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 }
@@ -332,10 +342,12 @@ a:hover { color: #1a1a1a; text-decoration: none; }
 .modern-menu .submenu a {
     display: block;
     padding: 3px 0;
-    color: #555;
+    color: #333;
     text-decoration: none;
-    font-size: 12px;
-    letter-spacing: 0.5px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
     transition: all 0.2s;
 }
 
@@ -346,11 +358,11 @@ a:hover { color: #1a1a1a; text-decoration: none; }
 
 /* Nested Submenu Header */
 .modern-menu .submenu a.main-link {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     padding: 5px 0;
     border-left: none;
-    color: #444;
+    color: #333;
     letter-spacing: 1px;
 }
 
@@ -442,7 +454,7 @@ img[src*="poem"] {
 }
 
 img[src*="poemjap"] {
-    max-height: 56vh !important;
+    max-height: 50vh !important;
 }
 
 /* ============================================================
@@ -600,6 +612,7 @@ img[src*="poemjap"] {
         font-size: 11px;
         line-height: 1.35;
         padding: 4px 0;
+        white-space: normal;
     }
 
     .gallery-grid {
