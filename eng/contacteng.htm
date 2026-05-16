@@ -29,20 +29,20 @@
 }
 .form-group label {
     display: block;
-    font-size: 11px;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #444;
-    margin-bottom: 5px;
+    color: #333;
+    margin-bottom: 7px;
 }
 input[type="text"], select, textarea {
     width: 100%;
     max-width: 680px;
-    padding: 10px;
-    border: 1px solid #CCC;
+    padding: 11px;
+    border: 1px solid #BBB;
     font-family: inherit;
-    font-size: 13px;
-    color: #333;
+    font-size: 14px;
+    color: #222;
     box-sizing: border-box;
 }
 input[type="Submit"] {
@@ -51,7 +51,7 @@ input[type="Submit"] {
     border: none;
     padding: 10px 30px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: 1px;
     transition: background 0.3s;
 }
@@ -64,8 +64,21 @@ input[type="Reset"] {
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 13px;
     margin-left: 10px;
+}
+@media screen and (max-width: 480px) {
+    .form-group label {
+        font-size: 11px;
+        margin-bottom: 5px;
+    }
+    input[type="text"], select, textarea {
+        padding: 10px;
+        font-size: 13px;
+    }
+    input[type="Submit"], input[type="Reset"] {
+        font-size: 12px;
+    }
 }
 </style>
 </head>
@@ -120,10 +133,6 @@ input[type="Reset"] {
 <td width="566" valign="top">
 <div class="artheader">Contact</div>
 <br>
-<div class="contact-intro">
-    Thank you for visiting. For inquiries regarding exhibitions or to simply share your thoughts on the work, please use the form below. I look forward to hearing from you.
-</div>
-
 <form action="https://formspree.io/mari@paintmari.com" method="POST">
 <input type="hidden" name="_next" value="http://www.paintmari.com/eng/thankyoueng.htm">
 <input type="hidden" name="_subject" value="New inquiry from paintmari.com!" />
@@ -137,15 +146,6 @@ input[type="Reset"] {
 <div class="form-group">
     <label for="email">Email Address</label>
     <input name="email" type="text" id="email" maxlength="100" required>
-</div>
-
-<div class="form-group">
-    <label for="subject">Subject</label>
-    <select name="subject" id="subject">
-        <option value="General Inquiry">General Inquiry</option>
-        <option value="Exhibition / Project">Exhibition / Project</option>
-        <option value="Other">Other</option>
-    </select>
 </div>
 
 <div class="form-group">
