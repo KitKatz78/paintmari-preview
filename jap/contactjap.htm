@@ -23,20 +23,20 @@
 }
 .form-group label {
     display: block;
-    font-size: 11px;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #444;
-    margin-bottom: 5px;
+    color: #333;
+    margin-bottom: 7px;
 }
 input[type="text"], select, textarea {
     width: 100%;
     max-width: 680px;
-    padding: 10px;
-    border: 1px solid #CCC;
+    padding: 11px;
+    border: 1px solid #BBB;
     font-family: inherit;
-    font-size: 13px;
-    color: #333;
+    font-size: 14px;
+    color: #222;
     box-sizing: border-box;
 }
 input[type="Submit"] {
@@ -45,7 +45,7 @@ input[type="Submit"] {
     border: none;
     padding: 10px 30px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: 1px;
     transition: background 0.3s;
 }
@@ -58,8 +58,21 @@ input[type="Reset"] {
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 13px;
     margin-left: 10px;
+}
+@media screen and (max-width: 480px) {
+    .form-group label {
+        font-size: 11px;
+        margin-bottom: 5px;
+    }
+    input[type="text"], select, textarea {
+        padding: 10px;
+        font-size: 13px;
+    }
+    input[type="Submit"], input[type="Reset"] {
+        font-size: 12px;
+    }
 }
 </style>
 </head>
@@ -114,10 +127,6 @@ input[type="Reset"] {
 <td width="566" valign="top">
 <div class="artheader">メールフォーム</div>
 <br>
-<div class="contact-intro">
-    サイトをご訪問いただきありがとうございます。展覧会、または作品に関するご感想など、以下のフォームよりお気軽にお問い合わせください。
-</div>
-
 <form action="https://formspree.io/mari@paintmari.com" method="POST">
 <input type="hidden" name="_next" value="http://www.paintmari.com/jap/thankyoujap.htm">
 <input type="hidden" name="_subject" value="New inquiry from paintmari.com!" />
@@ -131,15 +140,6 @@ input[type="Reset"] {
 <div class="form-group">
     <label for="email">メールアドレス</label>
     <input name="email" type="text" id="email" maxlength="100" required>
-</div>
-
-<div class="form-group">
-    <label for="subject">件名</label>
-    <select name="subject" id="subject">
-        <option value="全般的なお問い合わせ">全般的なお問い合わせ</option>
-        <option value="展覧会・プロジェクトについて">展覧会・プロジェクトについて</option>
-        <option value="その他">その他</option>
-    </select>
 </div>
 
 <div class="form-group">
